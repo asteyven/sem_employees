@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - lab07
 jobs:
   build:
     name: Hello world action
@@ -17,7 +18,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Build with Maven
+      - name: Unit Tests and Package with Maven
         run: mvn package
       - name: Run docker compose
         run: docker-compose up --abort-on-container-exit

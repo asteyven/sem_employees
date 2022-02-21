@@ -2,6 +2,7 @@ package com.napier.sem;
 
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -14,16 +15,7 @@ public class App
     public static void main(String[] args)
     {
         // Create new Application
-        App app = new App();
-        // Connect to database locally
-        app.connect("localhost:33060", 0);
-        // if unsuccessful try in docker
-        if(app.con == null) {
-            app.connect("db:3306", 30000);
-        }
-        if(app.con == null){
-            System.out.println("Error Exiting app");
-        }
+        App app = new App(true);
         // Get Employee
         Employee emp = app.getEmployee(255530);
         // Display results
@@ -33,7 +25,22 @@ public class App
         app.disconnect();
     }
 
-    /**
+    public App(boolean connect) {
+        //don't connect if unit tests
+        if(connect){
+            // Connect to database locally
+            connect("localhost:33060", 0);
+            // if unsuccessful try in docker
+            if(con == null) {
+                connect("db:3306", 30000);
+            }
+            if(con == null){
+                System.out.println("Error Exiting app");
+//            System.exit(-1);
+            }
+        }
+    }
+/**
      * Connect to the MySQL database.
      */
     /**
@@ -134,6 +141,34 @@ public class App
                             + "Salary:" + emp.salary + "\n"
                             + emp.dept_name + "\n"
                             + "Manager: " + emp.manager + "\n");
+        }
+    }
+
+    /**
+     * Prints a list of employees.
+     * @param employees The list of employees to print.
+     */
+    public void printSalaries(ArrayList<Employee> employees)
+    {
+        // Check employees is not null
+        if (employees == null)
+        {
+            System.out.println("No employees");
+            return;
+        }
+
+
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
+        // Loop over all employees in the list
+        for (Employee emp : employees)
+        {
+            if (emp == null)
+                continue;
+            String emp_string =
+                    String.format("%-10s %-15s %-20s %-8s",
+                            emp.emp_no, emp.first_name, emp.last_name, emp.salary);
+            System.out.println(emp_string);
         }
     }
 }
