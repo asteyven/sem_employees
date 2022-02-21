@@ -1,21 +1,12 @@
-# SEM_Demo
+# sem_employees
 
-Master Build  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Kevin-Sim/sem_2022_labs/A%20workflow%20for%20my%20Hello%20World%20App?style=flat-square)
+### Badges do not work on private repository 
 
-lab03 Build  ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/Kevin-Sim/sem_2022_labs/A%20workflow%20for%20my%20Hello%20World%20App/lab03?style=flat-square)
+Master Build  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Kevin-Sim/sem_employees/A%20workflow%20for%20my%20Hello%20World%20App?style=flat-square)
 
-License ![GitHub](https://img.shields.io/github/license/Kevin-Sim/sem_2022_labs)
+License ![GitHub](https://img.shields.io/github/license/Kevin-Sim/sem_employees)
 
-![Releases](https://img.shields.io/github/release/Kevin-Sim/sem_2022_labs?style=flat-square)
-
-```
-
-![GitHub](https://img.shields.io/github/license/Kevin-Sim/lab02)
-
-git rm --cached seMethods.iml
-git checkout -m "remove iml"
-git push
-```
+![Releases](https://img.shields.io/github/release/Kevin-Sim/sem_employees)
 
 connect to a running docker container
 
