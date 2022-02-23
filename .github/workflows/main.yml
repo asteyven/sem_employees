@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - lab03
 jobs:
   build:
     name: Hello world action
