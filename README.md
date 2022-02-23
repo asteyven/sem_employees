@@ -8,7 +8,10 @@ License ![GitHub](https://img.shields.io/github/license/Kevin-Sim/sem_employees)
 
 ![Releases](https://img.shields.io/github/release/Kevin-Sim/sem_employees)
 
-Lab03
+Lab04
+
+Zube Setup
+Add getAllSalaries and printSalaries
 
 - As an HR advisor I want to produce a report on the salary of all employees so that I can support financial reporting of the organisation.
 - As an HR advisor I want to produce a report on the salary of employees in a department so that I can support financial reporting of the organisation.
