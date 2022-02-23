@@ -47,8 +47,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                //Added allowPublicKeyRetrieval=true to get Integration Tests to work. Possibly due to accessing from another class?
-                con = DriverManager.getConnection("jdbc:mysql:db:3060/employees?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3060/employees?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
