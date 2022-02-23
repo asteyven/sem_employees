@@ -10,7 +10,7 @@ License ![GitHub](https://img.shields.io/github/license/Kevin-Sim/sem_employees)
 
 Lab05
 
-
+Use Case + diagram and implement Use Case 4 Implement Salaries by Role 
 
 
 ##ToDo
