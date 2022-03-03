@@ -13,9 +13,7 @@ public class App {
 
     public static void main(String[] args) {
         // Create new Application
-        App app = new App();
-
-        app.connect();
+        App app = new App(true);
 
         // Get Employee
         Employee emp = app.getEmployee(255530);
@@ -39,10 +37,27 @@ public class App {
         app.disconnect();
     }
 
+    public App(boolean connect) {
+        //don't connect if unit tests
+        if(connect){
+            // Connect to database locally
+            connect("localhost:33060", 0);
+            // if unsuccessful try in docker
+            if(con == null) {
+                connect("db:3306", 30000);
+            }
+            if(con == null){
+                System.out.println("Error Exiting app");
+//            System.exit(-1);
+            }
+        }
+    }
     /**
      * Connect to the MySQL database.
+     * @param conString Use db:3306 for docker and localhost:33060 for local or Integration Tests
+     * @param delay set to zero for local if db already running else 30000
      */
-    public void connect() {
+    public void connect(String conString, int delay) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -56,9 +71,10 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
-                Thread.sleep(20000);
+                Thread.sleep(delay);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                //Added allowPublicKeyRetrieval=true to get Integration Tests to work. Possibly due to accessing from another class?
+                con = DriverManager.getConnection("jdbc:mysql://" + conString + "/employees?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
@@ -69,7 +85,6 @@ public class App {
             }
         }
     }
-
     /**
      * Disconnect from the MySQL database.
      */
@@ -147,15 +162,28 @@ public class App {
 
     /**
      * Prints a list of employees.
-     *
      * @param employees The list of employees to print.
      */
-    public void printSalaries(ArrayList<Employee> employees) {
+    public void printSalaries(ArrayList<Employee> employees)
+    {
+        // Check employees is not null
+        if (employees == null)
+        {
+            System.out.println("No employees");
+            return;
+        }
+
+
         // Print header
         System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
         // Loop over all employees in the list
-        for (Employee emp : employees) {
-            String emp_string = String.format("%-10s %-15s %-20s %-8s", emp.emp_no, emp.first_name, emp.last_name, emp.salary);
+        for (Employee emp : employees)
+        {
+            if (emp == null)
+                continue;
+            String emp_string =
+                    String.format("%-10s %-15s %-20s %-8s",
+                            emp.emp_no, emp.first_name, emp.last_name, emp.salary);
             System.out.println(emp_string);
         }
     }
