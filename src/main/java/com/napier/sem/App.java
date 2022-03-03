@@ -57,7 +57,7 @@ public class App {
      * @param conString Use db:3306 for docker and localhost:33060 for local or Integration Tests
      * @param delay set to zero for local if db already running else 30000
      */
-    public void connect(String conString, int delay) {
+    public void connect(String location, int delay) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -74,7 +74,10 @@ public class App {
                 Thread.sleep(delay);
                 // Connect to database
                 //Added allowPublicKeyRetrieval=true to get Integration Tests to work. Possibly due to accessing from another class?
-                con = DriverManager.getConnection("jdbc:mysql://" + conString + "/employees?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://"
+                        + location
+                        + "/employees?allowPublicKeyRetrieval=true&useSSL=false",
+                        "root", "example");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
