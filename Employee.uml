@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.napier.sem.Employee</OriginalElement>
+  <nodes>
+    <node x="7.5" y="589.0">com.napier.sem.App</node>
+    <node x="77.16666666666669" y="0.0">com.napier.sem.Employee</node>
+    <node x="0.0" y="261.0">com.napier.sem.Department</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.napier.sem.Department" target="com.napier.sem.Employee" relationship="DEPENDENCY">
+      <point x="62.25" y="-138.0" />
+      <point x="186.75" y="235.0" />
+      <point x="148.16666666666669" y="235.0" />
+      <point x="0.0" y="104.5" />
+    </edge>
+    <edge source="com.napier.sem.App" target="com.napier.sem.Employee" relationship="CREATE">
+      <point x="92.25" y="-149.0" />
+      <point x="284.25" y="563.0" />
+      <point x="259.5" y="563.0" />
+      <point x="259.5" y="235.0" />
+      <point x="195.50000000000003" y="235.0" />
+      <point x="47.33333333333334" y="104.5" />
+    </edge>
+    <edge source="com.napier.sem.Department" target="com.napier.sem.Employee" relationship="TO_ONE">
+      <point x="-62.25" y="-138.0" />
+      <point x="62.25" y="235.0" />
+      <point x="100.83333333333334" y="235.0" />
+      <point x="-47.333333333333336" y="104.5" />
+    </edge>
+    <edge source="com.napier.sem.App" target="com.napier.sem.Department" relationship="DEPENDENCY">
+      <point x="-92.25" y="-149.0" />
+      <point x="99.75" y="563.0" />
+      <point x="124.5" y="563.0" />
+      <point x="0.0" y="138.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.6846747519294377" showDependencies="true" x="188.5" y="443.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

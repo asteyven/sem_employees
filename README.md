@@ -13,7 +13,7 @@ Lab05
 Use Case + diagram and implement Use Case 4 Implement Salaries by Role 
 
 
-##ToDo
+## ToDo
 
 - As an HR advisor I want to produce a report on the salary of all employees so that I can support financial reporting of the organisation.
 - As an HR advisor I want to produce a report on the salary of employees in a department so that I can support financial reporting of the organisation.
