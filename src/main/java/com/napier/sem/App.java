@@ -12,29 +12,17 @@ public class App {
     private Connection con = null;
 
     public static void main(String[] args) {
-        // Create new Application
-        App app = new App(true);
+        // Create new Application and connect to database
+        App a = new App(true);
 
-        // Get Employee
-        Employee emp = app.getEmployee(255530);
-        // Display results
-        app.displayEmployee(emp);
+        Department dept = a.getDepartment("Sales");
+        ArrayList<Employee> employees = a.getSalariesByDepartment(dept);
 
-        //get All Current Employees With Salaries
-        ArrayList<Employee> employees = app.getAllSalaries();
-
-        //print above
-       //app.printSalaries(employees);
-
-//        employees = app.getSalariesByRole("Engineer");
-//        app.printSalaries(employees);
-
-
-        employees = app.getSalariesByDepartment(app.getDepartmentByName("Sales"));
-        app.printSalaries(employees);
+        // Print salary report
+        a.printSalaries(employees);
 
         // Disconnect from database
-        app.disconnect();
+        a.disconnect();
     }
 
     public App(boolean connect) {
@@ -48,7 +36,7 @@ public class App {
             }
             if(con == null){
                 System.out.println("Error Exiting app");
-//            System.exit(-1);
+                System.exit(-1);
             }
         }
     }
@@ -246,7 +234,7 @@ public class App {
      * @param dept_name
      * @return
      */
-    public Department getDepartmentByName(String dept_name){
+    public Department getDepartment(String dept_name){
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
