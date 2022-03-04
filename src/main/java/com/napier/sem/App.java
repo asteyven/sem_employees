@@ -15,8 +15,9 @@ public class App {
         // Create new Application and connect to database
         App a = new App(true);
 
-        Department dept = a.getDepartment("Sales");
+        Department dept = a.getDepartment("Development");
         ArrayList<Employee> employees = a.getSalariesByDepartment(dept);
+
 
         // Print salary report
         a.printSalaries(employees);
