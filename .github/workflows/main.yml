@@ -46,7 +46,8 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos Settings Secret
-          files: ./target/jacoco.exec
+          # files: ./target/jacoco.exec
+          directory: ./target/site/jacoco
           flags: Integration Tests # optional
           verbose: true # optional (default = false)
   build:
