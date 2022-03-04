@@ -38,6 +38,7 @@ jobs:
         run: |
           docker build -t database ./db 
           docker run --name employees -dp 33060:3306 database
+          docker logs -f employees
       - name: Integration Tests
         run: | 
           mvn -Dtest=com.napier.sem.AppIntegrationTest test
