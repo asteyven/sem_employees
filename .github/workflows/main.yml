@@ -36,12 +36,12 @@ jobs:
           distribution: 'adopt'
       - name: Integration Tests
         run: |
-          docker build -t db ./db 
-          docker run --name employees -dp 33060:3306 db     
+          docker build -t database ./db 
+          docker run --name employees -dp 33060:3306 database     
           mvn -Dtest=com.napier.sem.AppIntegrationTest test
           docker stop employees
           docker rm employees
-          docker image rm db                    
+          docker image rm database                    
 
   build:
     name: Build and Start Using docker-compose
