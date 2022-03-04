@@ -45,7 +45,7 @@ jobs:
       - name: CodeCov
         uses: codecov/codecov-action@v2
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos Settings Secret
           files: ./coverage1.xml,./coverage2.xml # optional
           flags: Integration Tests # optional
 #          verbose: true # optional (default = false)
