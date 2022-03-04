@@ -46,9 +46,9 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos Settings Secret
-          files: ./coverage1.xml,./coverage2.xml # optional
+          files: ./target/jacoco.exec
           flags: Integration Tests # optional
-#          verbose: true # optional (default = false)
+          verbose: true # optional (default = false)
   build:
     name: Build and Start Using docker-compose
     runs-on: ubuntu-20.04

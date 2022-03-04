@@ -30,7 +30,7 @@ public class App {
         //don't connect if unit tests
         if(connect){
             // Connect to database locally
-            connect("localhost:33060", 30000);
+            connect("localhost:33060", 0);
             // if unsuccessful try in docker
             if(con == null) {
                 connect("db:3306", 30000);
