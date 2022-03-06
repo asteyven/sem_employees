@@ -15,7 +15,7 @@ public class AppTest
     @BeforeAll
     static void init()
     {
-        app = new App(false);
+        app = new App();
     }
 
     @Test
