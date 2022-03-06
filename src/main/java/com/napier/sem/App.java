@@ -16,9 +16,9 @@ public class App {
         // Create new Application and connect to database
         App a = new App();
 
-        if(args.length < 1){
+        if (args.length < 1) {
             a.connect("localhost:33060", 0);
-        }else{
+        } else {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
@@ -35,8 +35,9 @@ public class App {
 
     /**
      * Connect to the MySQL database.
+     *
      * @param location Use db:3306 for docker and localhost:33060 for local or Integration Tests
-     * @param delay set to zero for local if db already running else 30000
+     * @param delay    set to zero for local if db already running else 30000
      */
     public void connect(String location, int delay) {
         try {
@@ -56,8 +57,8 @@ public class App {
                 // Connect to database
                 //Added allowPublicKeyRetrieval=true to get Integration Tests to work. Possibly due to accessing from another class?
                 con = DriverManager.getConnection("jdbc:mysql://"
-                        + location
-                        + "/employees?allowPublicKeyRetrieval=true&useSSL=false",
+                                + location
+                                + "/employees?allowPublicKeyRetrieval=true&useSSL=false",
                         "root", "example");
                 System.out.println("Successfully connected");
                 break;
@@ -69,6 +70,7 @@ public class App {
             }
         }
     }
+
     /**
      * Disconnect from the MySQL database.
      */
@@ -146,13 +148,12 @@ public class App {
 
     /**
      * Prints a list of employees.
+     *
      * @param employees The list of employees to print.
      */
-    public void printSalaries(ArrayList<Employee> employees)
-    {
+    public void printSalaries(ArrayList<Employee> employees) {
         // Check employees is not null
-        if (employees == null)
-        {
+        if (employees == null) {
             System.out.println("No employees");
             return;
         }
@@ -161,8 +162,7 @@ public class App {
         // Print header
         System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
         // Loop over all employees in the list
-        for (Employee emp : employees)
-        {
+        for (Employee emp : employees) {
             if (emp == null)
                 continue;
             String emp_string =
@@ -224,10 +224,11 @@ public class App {
      * Quality Management
      * Research
      * Sales
+     *
      * @param dept_name
      * @return
      */
-    public Department getDepartment(String dept_name){
+    public Department getDepartment(String dept_name) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -259,7 +260,7 @@ public class App {
         return null;
     }
 
-    public ArrayList<Employee> getSalariesByDepartment(Department dept){
+    public ArrayList<Employee> getSalariesByDepartment(Department dept) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -289,34 +290,6 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get salary details");
             return null;
-        }
-    }
-
-    /**
-     * Prints a list of employees.
-     * @param employees The list of employees to print.
-     */
-    public void printSalaries(ArrayList<Employee> employees)
-    {
-        // Check employees is not null
-        if (employees == null)
-        {
-            System.out.println("No employees");
-            return;
-        }
-
-
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
-        // Loop over all employees in the list
-        for (Employee emp : employees)
-        {
-            if (emp == null)
-                continue;
-            String emp_string =
-                    String.format("%-10s %-15s %-20s %-8s",
-                            emp.emp_no, emp.first_name, emp.last_name, emp.salary);
-            System.out.println(emp_string);
         }
     }
 }

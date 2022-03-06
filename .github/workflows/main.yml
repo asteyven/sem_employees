@@ -17,15 +17,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-<<<<<<< HEAD
-      - name: Unit Tests and Package with Maven
-        run: mvn package
-      - name: Run docker compose
-        run: docker-compose up --abort-on-container-exit
-=======
       - name: Unit Tests
         run: mvn -Dtest=com.napier.sem.AppTest test
->>>>>>> lab08
 
   IntegrationTests:
     name: Integration Tests
