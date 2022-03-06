@@ -13,7 +13,13 @@ public class App {
 
     public static void main(String[] args) {
         // Create new Application and connect to database
-        App a = new App(true);
+        App a = new App();
+
+        if(args.length < 1){
+            a.connect("localhost:33060", 0);
+        }else{
+            a.connect(args[0], Integer.parseInt(args[1]));
+        }
 
         Department dept = a.getDepartment("Development");
         ArrayList<Employee> employees = a.getSalariesByDepartment(dept);
@@ -26,24 +32,10 @@ public class App {
         a.disconnect();
     }
 
-    public App(boolean connect) {
-        //don't connect if unit tests
-        if(connect){
-            // Connect to database locally
-            connect("localhost:33060", 30000);
-            // if unsuccessful try in docker
-            if(con == null) {
-                connect("db:3306", 30000);
-            }
-            if(con == null){
-                System.out.println("Error Exiting app");
-                System.exit(-1);
-            }
-        }
-    }
+
     /**
      * Connect to the MySQL database.
-     * @param conString Use db:3306 for docker and localhost:33060 for local or Integration Tests
+     * @param location Use db:3306 for docker and localhost:33060 for local or Integration Tests
      * @param delay set to zero for local if db already running else 30000
      */
     public void connect(String location, int delay) {
