@@ -6,7 +6,9 @@ Master Build  ![GitHub Workflow Status](https://img.shields.io/github/workflow/s
 
 License ![GitHub](https://img.shields.io/github/license/Kevin-Sim/sem_employees)
 
-![Releases](https://img.shields.io/github/release/Kevin-Sim/sem_employees)
+Release ![Releases](https://img.shields.io/github/release/Kevin-Sim/sem_employees)
+
+Codecov [![codecov](https://codecov.io/gh/Kevin-Sim/sem_employees/branch/master/graph/badge.svg?token=iQIPjfryiX)](https://codecov.io/gh/Kevin-Sim/sem_employees)
 
 Lab05
 
