@@ -4,9 +4,9 @@
 
 Master Build  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Kevin-Sim/sem_employees/A%20workflow%20for%20my%20Hello%20World%20App?style=flat-square)
 
-License ![GitHub](https://img.shields.io/github/license/Kevin-Sim/sem_employees)
+License ![GitHub](https://img.shields.io/github/license/Kevin-Sim/sem_employees?style=flat-square)
 
-Release ![Releases](https://img.shields.io/github/release/Kevin-Sim/sem_employees)
+Release ![Releases](https://img.shields.io/github/release/Kevin-Sim/sem_employees?style=flat-square)
 
 Codecov [![codecov](https://codecov.io/gh/Kevin-Sim/sem_employees/branch/master/graph/badge.svg?token=iQIPjfryiX)](https://codecov.io/gh/Kevin-Sim/sem_employees)
 
