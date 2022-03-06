@@ -19,6 +19,13 @@ jobs:
           distribution: 'adopt'
       - name: Unit Tests
         run: mvn -Dtest=com.napier.sem.AppTest test
+      - name: CodeCov
+        uses: codecov/codecov-action@v2
+        with:
+#          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos Settings Secret
+          directory: ./target/site/jacoco
+          flags: Integration Tests # optional
+          verbose: true # optional (default = false)
 
   IntegrationTests:
     name: Integration Tests
@@ -44,7 +51,7 @@ jobs:
       - name: CodeCov
         uses: codecov/codecov-action@v2
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos Settings Secret
+#          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos Settings Secret
           directory: ./target/site/jacoco
           flags: Integration Tests # optional
           verbose: true # optional (default = false)
