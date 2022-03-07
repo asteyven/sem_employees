@@ -17,19 +17,16 @@ public class App {
         App a = new App();
 
         if (args.length < 1) {
-            a.connect("localhost:33060", 30000);
+            a.connect("localhost:33060", 0);
         } else {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        Department dept = a.getDepartment("Development");
-        ArrayList<Employee> employees = a.getSalariesByDepartment(dept);
+        Employee e = a.getEmployee(10001);
+        ArrayList<Employee> employees = new ArrayList<>();
+        employees.add(e);
 
-//        employees = a.getAllSalaries();
-        // Print salary report
         EmployeeQueries.printEmployees(employees);
-
-        System.out.println(employees.size());
 
         // Disconnect from database
         a.disconnect();
