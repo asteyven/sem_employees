@@ -19,24 +19,24 @@ public class AppTest
     }
 
     @Test
-    void printSalariesTestNull()
+    void printEmployeesTestNull()
     {
-        app.printSalaries(null);
+        EmployeeQueries.printEmployees(null);
     }
 
     @Test
-    void printSalariesTestEmpty()
+    void printEmployeesTestEmpty()
     {
         ArrayList<Employee> employess = new ArrayList<Employee>();
-        app.printSalaries(employess);
+        EmployeeQueries.printEmployees(employess);
     }
 
     @Test
     void printSalariesTestContainsNull()
     {
-        ArrayList<Employee> employess = new ArrayList<Employee>();
-        employess.add(null);
-        app.printSalaries(employess);
+        ArrayList<Employee> employees = new ArrayList<Employee>();
+        employees.add(null);
+        EmployeeQueries.printEmployees(employees);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class AppTest
         emp.title = "Lecturer";
         emp.salary = 1000000000;
         employees.add(emp);
-        app.printSalaries(employees);
+        EmployeeQueries.printEmployees(employees);
     }
 
 }
