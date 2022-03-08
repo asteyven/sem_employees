@@ -1,6 +1,10 @@
 package com.napier.sem;
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -22,11 +26,10 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        Employee e = a.getEmployee(10001);
-        ArrayList<Employee> employees = new ArrayList<>();
-        employees.add(e);
 
-        EmployeeQueries.printEmployees(employees);
+        ArrayList<Employee> employees = a.getAllSalaries();
+//        a.printEmployees(employees);
+        a.outputEmployees(employees, "AllSalaries.md");
 
         // Disconnect from database
         a.disconnect();
@@ -54,7 +57,8 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(delay);
                 // Connect to database
-                //Added allowPublicKeyRetrieval=true to get Integration Tests to work. Possibly due to accessing from another class?
+                //Added allowPublicKeyRetrieval=true to get Integration Tests to work. Possibly
+                // due to accessing from another class?
                 con = DriverManager.getConnection("jdbc:mysql://"
                                 + location
                                 + "/employees?allowPublicKeyRetrieval=true&useSSL=false",
@@ -62,7 +66,7 @@ public class App {
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
@@ -84,18 +88,75 @@ public class App {
         }
     }
 
+    public void printEmployees(ArrayList<Employee> employees) {
+        // Check employees is not null
+        if (employees == null) {
+            System.out.println("No employees");
+            return;
+        }
+
+
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s %-20s %-10s %-20s %-10s", "Emp No",
+                "First Name", "Last Name", "Title", "Salary", "Department", "Manager"));
+        // Loop over all employees in the list
+        for (Employee emp : employees) {
+            if (emp == null) continue;
+            String emp_string = String.format("%-10s %-15s %-20s %-20s %-10s %-20s %-10s",
+                    emp.emp_no,
+                    emp.first_name, emp.last_name,
+                    emp.title, emp.salary, emp.dept_name, emp.manager);
+            System.out.println(emp_string);
+        }
+    }
+
     /**
-     * Get Single Employee
+     * Outputs to Markdown
+     *
+     * @param employees
+     */
+    public void outputEmployees(ArrayList<Employee> employees, String filename) {
+        // Check employees is not null
+        if (employees == null) {
+            System.out.println("No employees");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Print header
+        sb.append("| Emp No | First Name | Last Name | Title | Salary | Department | Manager |\r\n");
+        sb.append("| --- | --- | --- | --- | --- | --- | --- |\r\n");
+        // Loop over all employees in the list
+        for (Employee emp : employees) {
+            if (emp == null) continue;
+            sb.append("| " + emp.emp_no + " | " +
+                    emp.first_name + " | " + emp.last_name + " | " +
+                    emp.title + " | " + emp.salary + " | "
+                    + emp.dept_name + " | " + emp.manager + " |\r\n");
+        }
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filename)));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Get Single Employee but returned as an ArrayList<Employee> for consistency with other methods
+     *
      * @param ID
      * @return
      */
-    public Employee getEmployee(int ID) {
+    public ArrayList<Employee> getEmployee(int ID) {
         String sql = EmployeeQueries.getEmployeeSql(ID);
-        return getEmployees(sql).get(0);
+        return getEmployees(sql);
     }
 
     /**
      * Get List of Employees
+     *
      * @param strSelect
      * @return
      */
@@ -130,10 +191,10 @@ public class App {
      * @return A list of all employees and salaries, or null if there is an error.
      */
     public ArrayList<Employee> getAllSalaries() {
-            // Create string for SQL statement
-            String strSelect = EmployeeQueries.getAllSalariesSql();
-            // Execute SQL statement
-           return getEmployees(strSelect);
+        // Create string for SQL statement
+        String strSelect = EmployeeQueries.getAllSalariesSql();
+        // Execute SQL statement
+        return getEmployees(strSelect);
     }
 
     //TODO BELOW
@@ -149,7 +210,8 @@ public class App {
      */
     public ArrayList<Employee> getSalariesByRole(String role) {
 
-        String strSelect = "SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary"
+        String strSelect = "SELECT employees.emp_no, employees.first_name, employees.last_name, " +
+                "salaries.salary"
                 + " FROM employees, salaries, titles"
                 + " WHERE employees.emp_no = salaries.emp_no"
                 + "  AND employees.emp_no = titles.emp_no"
@@ -157,7 +219,7 @@ public class App {
                 + "  AND titles.to_date = '9999-01-01'"
                 + "  AND titles.title = '" + role + "'"
                 + " ORDER BY employees.emp_no ASC";
-            return getEmployees(strSelect);
+        return getEmployees(strSelect);
     }
 
     /**
@@ -207,15 +269,16 @@ public class App {
     }
 
     public ArrayList<Employee> getSalariesByDepartment(Department dept) {
-            // Create string for SQL statement
-            String strSelect = "SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary" +
-                    " FROM employees, salaries, dept_emp, departments" +
-                    " WHERE employees.emp_no = salaries.emp_no" +
-                    "  AND employees.emp_no = dept_emp.emp_no" +
-                    "  AND dept_emp.dept_no = departments.dept_no" +
-                    "  AND salaries.to_date = '9999-01-01'" +
-                    "  AND departments.dept_no = '" + dept.getDept_no() + "'" +
-                    " ORDER BY employees.emp_no ASC";
-            return getEmployees(strSelect);
+        // Create string for SQL statement
+        String strSelect = "SELECT employees.emp_no, employees.first_name, employees.last_name, " +
+                "salaries.salary" +
+                " FROM employees, salaries, dept_emp, departments" +
+                " WHERE employees.emp_no = salaries.emp_no" +
+                "  AND employees.emp_no = dept_emp.emp_no" +
+                "  AND dept_emp.dept_no = departments.dept_no" +
+                "  AND salaries.to_date = '9999-01-01'" +
+                "  AND departments.dept_no = '" + dept.getDept_no() + "'" +
+                " ORDER BY employees.emp_no ASC";
+        return getEmployees(strSelect);
     }
 }

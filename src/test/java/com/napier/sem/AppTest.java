@@ -21,14 +21,14 @@ public class AppTest
     @Test
     void printEmployeesTestNull()
     {
-        EmployeeQueries.printEmployees(null);
+        app.printEmployees(null);
     }
 
     @Test
     void printEmployeesTestEmpty()
     {
         ArrayList<Employee> employess = new ArrayList<Employee>();
-        EmployeeQueries.printEmployees(employess);
+        app.printEmployees(employess);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class AppTest
     {
         ArrayList<Employee> employees = new ArrayList<Employee>();
         employees.add(null);
-        EmployeeQueries.printEmployees(employees);
+        app.printEmployees(employees);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class AppTest
         emp.title = "Lecturer";
         emp.salary = 1000000000;
         employees.add(emp);
-        EmployeeQueries.printEmployees(employees);
+        app.printEmployees(employees);
     }
 
 }

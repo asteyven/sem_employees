@@ -22,7 +22,7 @@ public class AppIntegrationTest
     @Test
     void testGetEmployee()
     {
-        Employee emp = app.getEmployee(255530);
+        Employee emp = app.getEmployee(255530).get(0);
         assertEquals(emp.emp_no, 255530);
         assertEquals(emp.first_name, "Ronghao");
         assertEquals(emp.last_name, "Garigliano");
@@ -34,6 +34,7 @@ public class AppIntegrationTest
         ArrayList<Employee> employees = app.getAllSalaries();
         assertNotNull(employees);
         assertEquals(employees.size() > 0, true);
+        app.printEmployees(employees);
         System.out.println("");
     }
 }
