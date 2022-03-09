@@ -1,5 +1,7 @@
 # Use the latest MySQL image
-FROM mysql
+# FROM mysql
+# Mac Fix
+FROM mysql/mysql-server
 # Set the working directory
 WORKDIR /tmp
 # Copy all the files to the working directory of the container
@@ -11,3 +13,5 @@ COPY test_db/*.dump /tmp/
 COPY test_db/employees.sql /docker-entrypoint-initdb.d
 # Set the root password
 ENV MYSQL_ROOT_PASSWORD example
+#Mac Fix
+ENV MYSQL_ROOT_HOST=%
