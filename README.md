@@ -10,6 +10,28 @@ License ![GitHub](https://img.shields.io/github/license/Kevin-Sim/sem_employees)
 
 Lab03
 
+Mac MySQL Image Fix added 2 lines in db Dockerfile
+
+```yml
+# Use the latest MySQL image
+# FROM mysql
+# Mac Fix
+FROM mysql/mysql-server
+# Set the working directory
+WORKDIR /tmp
+# Copy all the files to the working directory of the container
+COPY test_db/*.sql /tmp/
+COPY test_db/*.dump /tmp/
+# Copy the main SQL file to docker-entrypoint-initdb.d.
+# Scripts and SQL files in this folder are executed on container startup.
+# This is specific to MySQL.
+COPY test_db/employees.sql /docker-entrypoint-initdb.d
+# Set the root password
+ENV MYSQL_ROOT_PASSWORD example
+#Mac Fix
+ENV MYSQL_ROOT_HOST=%
+```
+
 - As an HR advisor I want to produce a report on the salary of all employees so that I can support financial reporting of the organisation.
 - As an HR advisor I want to produce a report on the salary of employees in a department so that I can support financial reporting of the organisation.
 - As an department manager I want to produce a report on the salary of employees in my department so that I can support financial reporting for my department.
