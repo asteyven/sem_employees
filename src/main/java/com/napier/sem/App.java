@@ -40,7 +40,7 @@ public class App
             System.exit(-1);
         }
 
-        int retries = 10;
+        int retries = 11;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
