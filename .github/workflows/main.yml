@@ -22,9 +22,9 @@ jobs:
       - name: CodeCov
         uses: codecov/codecov-action@v2
         with:
-#          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos Settings Secret
+          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos Settings Secret
           directory: ./target/site/jacoco
-          flags: Integration Tests # optional
+          flags: Unit Tests # optional
           verbose: true # optional (default = false)
 
   IntegrationTests:
@@ -56,7 +56,7 @@ jobs:
           flags: Integration Tests # optional
           verbose: true # optional (default = false)
   build:
-    name: Build and Start Using docker-compose
+    name: Build Run in Docker and Deploy Release
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
