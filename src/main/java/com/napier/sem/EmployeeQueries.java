@@ -31,4 +31,9 @@ public class EmployeeQueries {
         String strSelect = basicQuery + "AND employees.emp_no = '" + emp_no + "'";
         return strSelect;
     }
+
+    public static String getAllSalariesByRoleSql(String role) {
+        String strSelect = basicQuery + "AND titles.title = '" + role + "'";
+        return strSelect;
+    }
 }

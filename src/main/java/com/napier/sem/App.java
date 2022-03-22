@@ -21,15 +21,13 @@ public class App {
         App a = new App();
 
         if (args.length < 1) {
-            a.connect("localhost:33060", 30000);
+            a.connect("localhost:33060", 0);
         } else {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-
-        ArrayList<Employee> employees = a.getAllSalaries();
-//        a.printEmployees(employees);
-        a.outputEmployees(employees, "AllSalaries.md");
+        ArrayList<Employee> employees = a.getSalariesByRole("Manager");
+        a.outputEmployees(employees, "ManagerSalaries.md");
 
         // Disconnect from database
         a.disconnect();
@@ -135,7 +133,8 @@ public class App {
                     + emp.dept_name + " | " + emp.manager + " |\r\n");
         }
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filename)));
+            new File("./reports/").mkdir();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(".//reports//" + filename)));
             writer.write(sb.toString());
             writer.close();
         } catch (IOException e) {
@@ -197,8 +196,6 @@ public class App {
         return getEmployees(strSelect);
     }
 
-    //TODO BELOW
-
     /**
      * Senior Engineer
      * Staff
@@ -209,18 +206,13 @@ public class App {
      * Manager
      */
     public ArrayList<Employee> getSalariesByRole(String role) {
-
-        String strSelect = "SELECT employees.emp_no, employees.first_name, employees.last_name, " +
-                "salaries.salary"
-                + " FROM employees, salaries, titles"
-                + " WHERE employees.emp_no = salaries.emp_no"
-                + "  AND employees.emp_no = titles.emp_no"
-                + "  AND salaries.to_date = '9999-01-01'"
-                + "  AND titles.to_date = '9999-01-01'"
-                + "  AND titles.title = '" + role + "'"
-                + " ORDER BY employees.emp_no ASC";
+        String strSelect = EmployeeQueries.getAllSalariesByRoleSql(role);
         return getEmployees(strSelect);
     }
+
+    //TODO BELOW
+
+
 
     /**
      * Customer Service
