@@ -78,4 +78,4 @@ jobs:
           prerelease: false
           automatic_release_tag: "latest"
           files: |
-            *.jar
+            ./target/*.jar
