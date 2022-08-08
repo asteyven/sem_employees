@@ -1,6 +1,6 @@
 # sem_employees
 
-### Badges do not work on private repository 
+### Badges do not work on private repository.
 
 Master Build  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Kevin-Sim/sem_employees/A%20workflow%20for%20my%20Hello%20World%20App?style=flat-square)
 
