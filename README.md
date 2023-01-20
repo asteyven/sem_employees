@@ -2,7 +2,7 @@
 
 ### Badges do not work on private repository 
 
-Master Build  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Kevin-Sim/sem_employees/A%20workflow%20for%20my%20Hello%20World%20App?style=flat-square)
+Master  Build  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Kevin-Sim/sem_employees/A%20workflow%20for%20my%20Hello%20World%20App?style=flat-square)
 
 License ![GitHub](https://img.shields.io/github/license/Kevin-Sim/sem_employees?style=flat-square)
 
